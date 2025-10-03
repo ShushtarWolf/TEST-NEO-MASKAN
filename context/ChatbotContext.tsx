@@ -13,11 +13,17 @@ type ChatbotContextValue = {
   isOpen: boolean;
   toggle: () => void;
   messages: Message[];
+<<<<<<< HEAD
   sendMessage: (message: string) => void;
+=======
+  loading: boolean;
+  sendMessage: (message: string) => Promise<void>;
+>>>>>>> origin/codex/create-next.js-project-from-figma-design-6f2bid
 };
 
 const ChatbotContext = createContext<ChatbotContextValue | undefined>(undefined);
 
+<<<<<<< HEAD
 const aiResponses = [
   {
     key: 'price',
@@ -49,28 +55,47 @@ function generateResponse(prompt: string) {
   return "I am here to assist with property discovery, scheduling tours, and neighborhood insights. Ask me about budget, lifestyle, or investment goals!";
 }
 
+=======
+>>>>>>> origin/codex/create-next.js-project-from-figma-design-6f2bid
 export function ChatbotProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 'welcome',
       sender: 'ai',
+<<<<<<< HEAD
       content: 'Hi! I am Neo, your property discovery copilot. How can I personalize your search today?',
       createdAt: new Date()
     }
   ]);
+=======
+      content: 'سلام! من نئو هستم، همیار هوشمند نئومسکن. بگویید به دنبال چه فضایی هستید تا پیشنهاد بدهم.',
+      createdAt: new Date()
+    }
+  ]);
+  const [loading, setLoading] = useState(false);
+>>>>>>> origin/codex/create-next.js-project-from-figma-design-6f2bid
 
   const value = useMemo<ChatbotContextValue>(() => ({
     isOpen,
     toggle: () => setIsOpen((prev) => !prev),
     messages,
+<<<<<<< HEAD
     sendMessage: (message: string) => {
       const userMessage: Message = {
         id: `user-${Date.now()}`,
+=======
+    loading,
+    sendMessage: async (message: string) => {
+      const timestamp = Date.now();
+      const userMessage: Message = {
+        id: `user-${timestamp}`,
+>>>>>>> origin/codex/create-next.js-project-from-figma-design-6f2bid
         sender: 'user',
         content: message,
         createdAt: new Date()
       };
+<<<<<<< HEAD
       const aiMessage: Message = {
         id: `ai-${Date.now()}`,
         sender: 'ai',
@@ -80,6 +105,41 @@ export function ChatbotProvider({ children }: { children: React.ReactNode }) {
       setMessages((prev) => [...prev, userMessage, aiMessage]);
     }
   }), [isOpen, messages]);
+=======
+      setMessages((prev) => [...prev, userMessage]);
+      setLoading(true);
+      try {
+        const response = await fetch('/api/ai/suggest', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: message })
+        });
+        if (!response.ok) {
+          throw new Error('خطای سرور');
+        }
+        const json = await response.json();
+        const insight: string = json?.data?.insight ?? 'پیشنهاد جدیدی ثبت شد.';
+        const aiMessage: Message = {
+          id: `ai-${timestamp}`,
+          sender: 'ai',
+          content: insight,
+          createdAt: new Date()
+        };
+        setMessages((prev) => [...prev, aiMessage]);
+      } catch (error) {
+        const fallback: Message = {
+          id: `ai-error-${timestamp}`,
+          sender: 'ai',
+          content: 'متاسفم، ارتباط با سرویس پیشنهاددهی برقرار نشد. لطفاً دوباره امتحان کنید.',
+          createdAt: new Date()
+        };
+        setMessages((prev) => [...prev, fallback]);
+      } finally {
+        setLoading(false);
+      }
+    }
+  }), [isOpen, loading, messages]);
+>>>>>>> origin/codex/create-next.js-project-from-figma-design-6f2bid
 
   return <ChatbotContext.Provider value={value}>{children}</ChatbotContext.Provider>;
 }

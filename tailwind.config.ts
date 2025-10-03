@@ -28,7 +28,11 @@ const config: Config = {
         muted: '#6b7280'
       },
       fontFamily: {
+<<<<<<< HEAD
         sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif']
+=======
+        sans: ['var(--font-vazirmatn)', 'Vazirmatn', 'system-ui', 'sans-serif']
+>>>>>>> origin/codex/create-next.js-project-from-figma-design-6f2bid
       },
       boxShadow: {
         neo: '0 20px 45px -15px rgba(40, 50, 160, 0.35)'
