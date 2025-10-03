@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  direction: rtl;
+  text-align: right;
+  @apply bg-white text-dark font-sans antialiased;
+}
+
+a {
+  @apply text-primary-600 hover:text-primary-700 transition-colors;
+}
+
+::selection {
+  background: theme('colors.primary.500');
+  color: white;
+}
