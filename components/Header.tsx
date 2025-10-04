@@ -33,7 +33,7 @@ export function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
         <Link href="/" className="flex items-center gap-3">
           <div className="flex flex-col text-right">
-            <span className="text-lg font-semibold text-dark">نئومسکن</span>
+            <span className="text-lg font-lalezar text-dark">نئومسکن</span>
             <span className="text-xs font-medium tracking-[0.3em] text-muted">INSPIRE</span>
           </div>
           <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white shadow-neo">
