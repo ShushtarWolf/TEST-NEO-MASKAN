@@ -1,8 +1,11 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useMemo, useState } from 'react';
 import { Listing } from '@/types/listing';
 import { Button } from '@/ui/Button';
-import { ArrowLeft, Bath, BedDouble, Ruler } from 'lucide-react';
+import { ArrowLeft, Bath, BedDouble, ImageOff, Ruler } from 'lucide-react';
 import { cn } from '@/utils/cn';
 
 interface PropertyCardProps {
@@ -11,6 +14,16 @@ interface PropertyCardProps {
 }
 
 export function PropertyCard({ listing, highlight = false }: PropertyCardProps) {
+  const [imageStatus, setImageStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+
+  const shouldShowImage = useMemo(() => {
+    return Boolean(listing.image) && imageStatus !== 'error';
+  }, [listing.image, imageStatus]);
+
+  useEffect(() => {
+    setImageStatus('loading');
+  }, [listing.image]);
+
   return (
     <article
       className={cn(
@@ -18,14 +31,32 @@ export function PropertyCard({ listing, highlight = false }: PropertyCardProps) 
         highlight && 'border-primary-200'
       )}
     >
-      <div className="relative h-64 w-full">
-        <Image
-          src={listing.image}
-          alt={listing.title}
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 33vw"
-        />
+      <div className="relative h-64 w-full overflow-hidden">
+        {shouldShowImage ? (
+          <>
+            <Image
+              src={listing.image}
+              alt={listing.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className={cn(
+                'object-cover transition-opacity duration-500',
+                imageStatus === 'ready' ? 'opacity-100' : 'opacity-0'
+              )}
+              onLoad={() => setImageStatus('ready')}
+              onError={() => setImageStatus('error')}
+              priority={highlight}
+            />
+            {imageStatus !== 'ready' ? (
+              <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-slate-200 via-slate-100 to-primary-50" />
+            ) : null}
+          </>
+        ) : (
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-slate-200 via-slate-100 to-primary-50 text-slate-600">
+            <ImageOff className="h-8 w-8" aria-hidden="true" />
+            <span className="mt-2 text-xs font-semibold">پیش‌نمایش در دسترس نیست</span>
+          </div>
+        )}
         {listing.featured ? (
           <span className="absolute right-4 top-4 rounded-full bg-white/90 px-4 py-1 text-xs font-semibold text-primary-600">
             ویژه
