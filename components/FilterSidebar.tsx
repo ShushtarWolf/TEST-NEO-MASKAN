@@ -43,7 +43,7 @@ export function FilterSidebar({ availableTags, onApply }: FilterSidebarProps) {
   }
 
   return (
-    <aside className="space-y-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+    <aside className="space-y-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm w-full" dir="rtl">
       <div>
         <h3 className="text-sm font-semibold text-dark">بودجه تقریبی (درهم)</h3>
         <div className="mt-4 space-y-3 text-xs text-muted">

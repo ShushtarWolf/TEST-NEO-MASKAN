@@ -63,14 +63,14 @@ export function PropertyCard({ listing, highlight = false }: PropertyCardProps) 
           </span>
         ) : null}
       </div>
-      <div className="flex flex-1 flex-col space-y-5 p-6 text-right">
+      <div className="flex flex-1 flex-col space-y-5 p-6 text-right" dir="rtl">
         <div className="space-y-2 text-center">
           <p className="text-xs font-semibold tracking-[0.2em] text-primary-500">{listing.location}</p>
           <h3 className="text-lg font-lalezar font-semibold text-dark">{listing.title}</h3>
-          <p className="text-sm font-lalezar text-muted">{listing.description}</p>
+          <p className="text-sm font-lalezar text-muted leading-relaxed text-justify">{listing.description}</p>
         </div>
         <div className="flex items-center justify-between text-sm">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center justify-center gap-4">
             <span className="inline-flex items-center gap-1">
               <BedDouble className="h-4 w-4 text-primary-500" />
               <span className="font-lalezar">{listing.bedrooms} خواب</span>
@@ -96,7 +96,7 @@ export function PropertyCard({ listing, highlight = false }: PropertyCardProps) 
           ))}
         </div>
         <div className="mt-auto flex items-center justify-between">
-          <div className="text-xs font-lalezar text-muted">انرژی {listing.energyScore} · پیاده‌روی {listing.walkScore}</div>
+          <div className="text-xs font-lalezar text-muted text-center">انرژی {listing.energyScore} · پیاده‌روی {listing.walkScore}</div>
           <Button asChild variant="secondary" className="gap-2">
             <Link href={`/listings/${listing.id}`} className="inline-flex items-center gap-2">
               <ArrowLeft className="h-4 w-4" />

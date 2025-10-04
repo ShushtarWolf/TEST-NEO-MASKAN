@@ -71,7 +71,7 @@ export function ListingsClient({ initialListings }: ListingsClientProps) {
   }
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[320px_1fr]">
+    <div className="grid gap-6 lg:grid-cols-[320px_1fr]">
       <Modal
         open={isModalOpen}
         onClose={() => setModalOpen(false)}
@@ -113,7 +113,7 @@ export function ListingsClient({ initialListings }: ListingsClientProps) {
             در حال بارگذاری پیشنهادها...
           </div>
         ) : (
-          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {displayed.map((listing) => (
               <PropertyCard key={listing.id} listing={listing} />
             ))}
