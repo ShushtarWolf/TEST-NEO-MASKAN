@@ -64,7 +64,7 @@ export function PropertyCard({ listing, highlight = false }: PropertyCardProps) 
         ) : null}
       </div>
       <div className="flex flex-1 flex-col space-y-5 p-6 text-right">
-        <div className="space-y-2">
+        <div className="space-y-2 text-center">
           <p className="text-xs font-semibold tracking-[0.2em] text-primary-500">{listing.location}</p>
           <h3 className="text-lg font-lalezar font-semibold text-dark">{listing.title}</h3>
           <p className="text-sm font-lalezar text-muted">{listing.description}</p>
