@@ -15,7 +15,10 @@ const vazirmatn = Vazirmatn({
 export const metadata: Metadata = {
   title: 'نئومسکن | تجربه‌های هوشمند ملک',
   description:
-    'نئومسکن سکوی الهام‌بخش معاملات ملک است؛ با هویت Inspire Maskan، داده‌های دقیق، و راهنمایی هوش مصنوعی برای کشف خانه ایده‌آل.'
+    'نئومسکن سکوی الهام‌بخش معاملات ملک است؛ با هویت Inspire Maskan، داده‌های دقیق، و راهنمایی هوش مصنوعی برای کشف خانه ایده‌آل.',
+  icons: {
+    icon: '/favicon.svg'
+  }
 };
 
 export default function RootLayout({
