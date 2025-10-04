@@ -4,18 +4,13 @@ import { Hero } from '@/components/Hero';
 import { Stats } from '@/components/Stats';
 import { PropertyCard } from '@/components/PropertyCard';
 import { fetchListings } from '@/lib/mockApi';
-import { getRecommendations, type RecommendationInput } from '@/utils/recommender';
+import { defaultRecommendationProfile } from '@/lib/recommendationProfile';
+import { getRecommendations } from '@/utils/recommender';
 import { Button } from '@/ui/Button';
-
-const demoRecommendationProfile: RecommendationInput = {
-  budget: 950000,
-  bedrooms: 3,
-  focusTags: ['خانوادگی', 'لوکس']
-};
 
 export default async function HomePage() {
   const listings = await fetchListings();
-  const recommendations = getRecommendations(listings, demoRecommendationProfile);
+  const recommendations = getRecommendations(listings, defaultRecommendationProfile);
 
   return (
     <div className="space-y-16 pb-24">
