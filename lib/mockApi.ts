@@ -1,7 +1,12 @@
-import { Listing } from '@/types/listing';
 import { authenticateUser, getListingById, getListings, registerUser } from '@/lib/data';
+import { Listing } from '@/types/listing';
 
-function wait(min = 120, max = 420) {
+type WaitOptions = {
+  min?: number;
+  max?: number;
+};
+
+function wait({ min = 120, max = 420 }: WaitOptions = {}) {
   const duration = Math.floor(Math.random() * (max - min + 1)) + min;
   return new Promise((resolve) => setTimeout(resolve, duration));
 }

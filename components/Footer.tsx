@@ -35,16 +35,13 @@ export function Footer() {
             </span>
           </div>
           <p className="text-sm text-muted">
-            نئومسکن سفر میان کشف تا روز اسباب‌کشی را یکپارچه می‌کند و چشم‌انداز Inspire Maskan را به تجربه‌ای دیجیتال و قابل لمس
-            بدل می‌سازد.
+            نئومسکن سفر میان کشف تا روز اسباب‌کشی را یکپارچه می‌کند و چشم‌انداز Inspire Maskan را به تجربه‌ای دیجیتال و قابل لمس بدل می‌سازد.
           </p>
         </div>
 
         {footerNav.map((section) => (
           <div key={section.title} className="space-y-4 text-right">
-            <h3 className="text-sm font-semibold tracking-wide text-dark/70">
-              {section.title}
-            </h3>
+            <h3 className="text-sm font-semibold tracking-wide text-dark/70">{section.title}</h3>
             <ul className="space-y-3 text-sm text-muted">
               {section.links.map((link) => (
                 <li key={link.href}>
@@ -57,7 +54,7 @@ export function Footer() {
           </div>
         ))}
 
-        <div className="space-y-4">
+        <div className="space-y-4 text-right">
           <h3 className="text-sm font-semibold tracking-wide text-dark/70">خبرنامه نئومسکن</h3>
           <p className="text-sm text-muted">
             برای دریافت روایت‌های بازار و اطلاع از عرضه‌های تازه، ایمیل خود را ثبت کنید.
