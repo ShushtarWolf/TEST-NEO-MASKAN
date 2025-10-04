@@ -10,7 +10,8 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'plus.unsplash.com'
       }
-    ]
+    ],
+    unoptimized: process.env.NODE_ENV === 'development'
   }
 };
 
