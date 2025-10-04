@@ -25,7 +25,7 @@ const config: Config = {
         },
         accent: '#ff9f1c',
         dark: '#12131a',
-        muted: '#6b7280'
+        muted: '#4b5563'
       },
       fontFamily: {
         sans: ['var(--font-vazirmatn)', 'Vazirmatn', 'system-ui', 'sans-serif']
