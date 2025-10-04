@@ -1,18 +1,21 @@
 import Link from 'next/link';
+
 import { Hero } from '@/components/Hero';
 import { Stats } from '@/components/Stats';
 import { PropertyCard } from '@/components/PropertyCard';
 import { fetchListings } from '@/lib/mockApi';
-import { getRecommendations } from '@/utils/recommender';
+import { getRecommendations, type RecommendationInput } from '@/utils/recommender';
 import { Button } from '@/ui/Button';
+
+const demoRecommendationProfile: RecommendationInput = {
+  budget: 950000,
+  bedrooms: 3,
+  focusTags: ['خانوادگی', 'لوکس']
+};
 
 export default async function HomePage() {
   const listings = await fetchListings();
-  const recommendations = getRecommendations(listings, {
-    budget: 950000,
-    bedrooms: 3,
-    focusTags: ['خانوادگی', 'لوکس']
-  });
+  const recommendations = getRecommendations(listings, demoRecommendationProfile);
 
   return (
     <div className="space-y-16 pb-24">
