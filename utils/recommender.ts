@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import type { Listing } from '@/data/listings';
-=======
 import type { Listing } from '@/types/listing';
->>>>>>> origin/codex/create-next.js-project-from-figma-design-6f2bid
 
 export type RecommendationInput = {
   budget?: number;
@@ -13,16 +9,6 @@ export type RecommendationInput = {
 type Recommendation = Listing & { score: number };
 
 const TAG_WEIGHTS: Record<string, number> = {
-<<<<<<< HEAD
-  luxury: 1.4,
-  family: 1.2,
-  waterfront: 1.5,
-  investment: 1.1,
-  garden: 1.1,
-  city: 1.0,
-  culture: 1.0,
-  duplex: 1.05
-=======
   لوکس: 1.4,
   خانوادگی: 1.2,
   ساحلی: 1.5,
@@ -31,7 +17,6 @@ const TAG_WEIGHTS: Record<string, number> = {
   شهری: 1.0,
   فرهنگی: 1.0,
   دوبلکس: 1.05
->>>>>>> origin/codex/create-next.js-project-from-figma-design-6f2bid
 };
 
 export function getRecommendations(listings: Listing[], input: RecommendationInput): Recommendation[] {

@@ -11,16 +11,16 @@
   "dependencies": {
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.5",
+    "@radix-ui/react-slot": "^1.0.2",
     "clsx": "^2.1.1",
+    "framer-motion": "^10.16.4",
     "lucide-react": "^0.462.0",
     "next": "^14.1.0",
     "next-seo": "^6.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "swr": "^2.2.5",
-    "tailwind-merge": "^2.2.1",
-    "@radix-ui/react-slot": "^1.0.2",
-    "framer-motion": "^10.16.4"
+    "tailwind-merge": "^2.2.1"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.7",
@@ -34,8 +34,4 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/codex/create-next.js-project-from-figma-design-6f2bid

@@ -22,28 +22,16 @@ export function NewsletterForm() {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           required
-<<<<<<< HEAD
-          placeholder="Enter your email"
-          className="w-full rounded-full border-0 px-4 py-2.5 text-sm text-dark placeholder:text-slate-400 focus:ring-0"
-        />
-        <Button type="submit" className="rounded-none rounded-r-full">
-          Join
-=======
           placeholder="ایمیل خود را وارد کنید"
           className="w-full rounded-full border-0 px-4 py-2.5 text-sm text-dark placeholder:text-slate-400 focus:ring-0"
         />
         <Button type="submit" className="rounded-none rounded-l-full">
           عضویت
->>>>>>> origin/codex/create-next.js-project-from-figma-design-6f2bid
         </Button>
       </div>
       {submitted ? (
         <p className="text-xs font-medium text-primary-600">
-<<<<<<< HEAD
-          Welcome aboard! You&apos;ll receive our next briefing shortly.
-=======
           سپاس! به‌زودی جدیدترین خبرنامه برای شما ارسال می‌شود.
->>>>>>> origin/codex/create-next.js-project-from-figma-design-6f2bid
         </p>
       ) : null}
     </form>
