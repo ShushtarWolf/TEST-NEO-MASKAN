@@ -1,41 +1,12 @@
 {
-  "name": "neo-maskan",
-  "version": "0.1.0",
+  "name": "neo-maskan-offline",
+  "version": "1.0.0",
   "private": true,
+  "description": "Offline static build of the NeoMaskan marketing site without external dependencies.",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@headlessui/react": "^1.7.18",
-    "@heroicons/react": "^2.1.5",
-    "clsx": "^2.1.1",
-    "lucide-react": "^0.462.0",
-    "next": "^14.1.0",
-    "next-seo": "^6.5.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "swr": "^2.2.5",
-    "tailwind-merge": "^2.2.1",
-    "@radix-ui/react-slot": "^1.0.2",
-    "framer-motion": "^10.16.4"
-  },
-  "devDependencies": {
-    "@tailwindcss/forms": "^0.5.7",
-    "@types/node": "^20.11.25",
-    "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.15",
-    "autoprefixer": "^10.4.16",
-    "eslint": "^8.56.0",
-    "eslint-config-next": "^14.1.0",
-    "postcss": "^8.4.35",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5.3.3"
+    "dev": "node node_modules/next/bin/next.js dev",
+    "build": "node node_modules/next/bin/next.js build",
+    "start": "node node_modules/next/bin/next.js start",
+    "tsc": "node node_modules/typescript/bin/tsc.js"
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/codex/create-next.js-project-from-figma-design-6f2bid
