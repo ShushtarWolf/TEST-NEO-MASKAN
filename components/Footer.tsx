@@ -27,22 +27,22 @@ export function Footer() {
         <div className="space-y-4 text-right">
           <div className="flex items-center justify-end gap-3">
             <div className="text-right">
-              <p className="text-lg font-semibold text-dark">نئومسکن</p>
+              <p className="text-lg font-lalezar text-dark">نئومسکن</p>
               <p className="text-xs tracking-[0.3em] text-muted">INSPIRE</p>
             </div>
             <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-600 text-white shadow-neo">
               NM
             </span>
           </div>
-          <p className="text-sm text-muted">
+          <p className="text-sm font-lalezar text-muted">
             نئومسکن سفر میان کشف تا روز اسباب‌کشی را یکپارچه می‌کند و چشم‌انداز Inspire Maskan را به تجربه‌ای دیجیتال و قابل لمس بدل می‌سازد.
           </p>
         </div>
 
         {footerNav.map((section) => (
           <div key={section.title} className="space-y-4 text-right">
-            <h3 className="text-sm font-semibold tracking-wide text-dark/70">{section.title}</h3>
-            <ul className="space-y-3 text-sm text-muted">
+            <h3 className="text-sm font-lalezar font-semibold tracking-wide text-dark/70">{section.title}</h3>
+            <ul className="space-y-3 text-sm font-lalezar text-muted">
               {section.links.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="hover:text-primary-600">
@@ -55,8 +55,8 @@ export function Footer() {
         ))}
 
         <div className="space-y-4 text-right">
-          <h3 className="text-sm font-semibold tracking-wide text-dark/70">خبرنامه نئومسکن</h3>
-          <p className="text-sm text-muted">
+          <h3 className="text-sm font-lalezar font-semibold tracking-wide text-dark/70">خبرنامه نئومسکن</h3>
+          <p className="text-sm font-lalezar text-muted">
             برای دریافت روایت‌های بازار و اطلاع از عرضه‌های تازه، ایمیل خود را ثبت کنید.
           </p>
           <NewsletterForm />
@@ -64,8 +64,8 @@ export function Footer() {
       </div>
       <div className="border-t border-slate-200/70 bg-white/70 py-6">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 text-xs text-muted md:flex-row">
-          <p>© {new Date().getFullYear()} استودیو نئومسکن. الهام گرفته از Inspire Maskan.</p>
-          <div className="flex gap-4">
+          <p className="font-lalezar">© {new Date().getFullYear()} استودیو نئومسکن. الهام گرفته از Inspire Maskan.</p>
+          <div className="flex gap-4 font-lalezar">
             <Link href="#privacy">حریم خصوصی</Link>
             <Link href="#terms">قوانین</Link>
             <Link href="#accessibility">دسترسی‌پذیری</Link>

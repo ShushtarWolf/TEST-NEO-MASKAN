@@ -30,9 +30,9 @@ export function Modal({ open, title, description, onClose, children }: ModalProp
           >
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h2 className="text-lg font-semibold text-dark">{title}</h2>
+                <h2 className="text-lg font-lalezar font-semibold text-dark">{title}</h2>
                 {description ? (
-                  <p className="mt-2 text-sm text-muted">{description}</p>
+                  <p className="mt-2 text-sm font-lalezar text-muted">{description}</p>
                 ) : null}
               </div>
               <button
@@ -44,7 +44,7 @@ export function Modal({ open, title, description, onClose, children }: ModalProp
                 <X className="h-4 w-4" />
               </button>
             </div>
-            <div className="mt-5 text-right text-sm text-dark">{children}</div>
+            <div className="mt-5 text-right text-sm font-lalezar text-dark">{children}</div>
           </motion.div>
         </motion.div>
       ) : null}

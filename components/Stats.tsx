@@ -12,7 +12,7 @@ export function Stats() {
         {stats.map((stat) => (
           <div key={stat.label} className="rounded-2xl border border-slate-200/60 bg-slate-50/60 p-6 shadow-sm">
             <p className="text-3xl font-semibold text-primary-600">{stat.value}</p>
-            <p className="mt-2 text-sm text-muted">{stat.label}</p>
+            <p className="mt-2 text-sm font-lalezar text-muted">{stat.label}</p>
           </div>
         ))}
       </div>

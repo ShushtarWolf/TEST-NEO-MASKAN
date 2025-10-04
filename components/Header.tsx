@@ -47,14 +47,14 @@ export function Header() {
               key={link.href}
               href={link.href}
               className={cn(
-                'text-sm font-medium transition-colors',
+                'text-sm font-lalezar font-medium transition-colors',
                 isActive(link.href) ? 'text-primary-600' : 'text-muted hover:text-dark'
               )}
             >
               {link.label}
             </Link>
           ))}
-          <Button asChild className="shadow-neo">
+          <Button asChild className="shadow-neo font-lalezar">
             <Link href="/listings?cta=book-tour">رزرو بازدید</Link>
           </Button>
           <ChatbotToggle />
@@ -82,14 +82,14 @@ export function Header() {
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
                 className={cn(
-                  'text-base font-semibold',
+                  'text-base font-lalezar font-semibold',
                   isActive(link.href) ? 'text-primary-600' : 'text-dark'
                 )}
               >
                 {link.label}
               </Link>
             ))}
-            <Button asChild className="w-full justify-center shadow-neo">
+            <Button asChild className="w-full justify-center shadow-neo font-lalezar">
               <Link href="/listings?cta=book-tour" onClick={() => setMobileOpen(false)}>
                 رزرو بازدید
               </Link>

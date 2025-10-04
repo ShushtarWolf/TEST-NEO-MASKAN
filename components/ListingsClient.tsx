@@ -78,7 +78,7 @@ export function ListingsClient({ initialListings }: ListingsClientProps) {
         title="خلاصه فیلترها"
         description="ترکیب جست‌وجو و فیلترهای اعمال‌شده روی داده‌های نئومسکن"
       >
-        <ul className="space-y-2">
+        <ul className="space-y-2 font-lalezar">
           <li>عبارت جست‌وجو: {query || '—'}</li>
           <li>بودجه: {activeFilters?.minPrice?.toLocaleString('fa-IR') ?? 'حداقل نامشخص'} تا {activeFilters?.maxPrice?.toLocaleString('fa-IR') ?? 'حداکثر نامشخص'}</li>
           <li>حداقل خواب: {activeFilters?.bedrooms ?? 'بدون محدودیت'}</li>
@@ -96,7 +96,7 @@ export function ListingsClient({ initialListings }: ListingsClientProps) {
             onSubmit={submitSearch}
             placeholder="جست‌وجوی دستی در عنوان یا محله"
           />
-          <Button variant="ghost" onClick={resetAll} className="self-end text-xs text-muted">
+          <Button variant="ghost" onClick={resetAll} className="self-end text-xs font-lalezar text-muted">
             پاک‌سازی فیلترها
           </Button>
         </div>
@@ -107,9 +107,9 @@ export function ListingsClient({ initialListings }: ListingsClientProps) {
           onInsight={setInsight}
           onLoadingChange={setLoading}
         />
-        {insight ? <div className="rounded-2xl bg-primary-50 p-4 text-sm text-primary-700">{insight}</div> : null}
+        {insight ? <div className="rounded-2xl bg-primary-50 p-4 text-sm font-lalezar text-primary-700">{insight}</div> : null}
         {loading ? (
-          <div className="rounded-3xl border border-dashed border-primary-200 bg-white p-10 text-center text-sm text-muted">
+          <div className="rounded-3xl border border-dashed border-primary-200 bg-white p-10 text-center text-sm font-lalezar text-muted">
             در حال بارگذاری پیشنهادها...
           </div>
         ) : (
@@ -121,8 +121,8 @@ export function ListingsClient({ initialListings }: ListingsClientProps) {
         )}
         {displayed.length === 0 && !loading ? (
           <div className="rounded-3xl border border-dashed border-primary-200 bg-primary-50/60 p-10 text-center">
-            <p className="text-lg font-semibold text-primary-600">موردی یافت نشد.</p>
-            <p className="mt-2 text-sm text-primary-600/80">شرایط را تغییر دهید یا از نئو کمک بخواهید.</p>
+            <p className="text-lg font-lalezar font-semibold text-primary-600">موردی یافت نشد.</p>
+            <p className="mt-2 text-sm font-lalezar text-primary-600/80">شرایط را تغییر دهید یا از نئو کمک بخواهید.</p>
           </div>
         ) : null}
       </div>

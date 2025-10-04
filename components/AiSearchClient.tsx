@@ -42,7 +42,7 @@ export function AiSearchClient() {
   return (
     <div className="space-y-8">
       <div className="rounded-3xl border border-primary-100 bg-white p-6 shadow-neo">
-        <p className="text-sm text-muted">
+        <p className="text-sm font-lalezar text-muted">
           نئو با استفاده از فیلترهای هوشمند، برچسب‌ها و بودجه شما را تحلیل می‌کند و نتایج را رتبه‌بندی می‌نماید. پرسش خود را به زبان طبیعی وارد کنید.
         </p>
         <div className="mt-4 flex flex-col gap-3 md:flex-row md:items-center">
@@ -52,12 +52,12 @@ export function AiSearchClient() {
             onSubmit={runSearch}
             placeholder="مثال: ویلای ساحلی با ۴ خواب و بودجه ۱٫۳ میلیون"
           />
-          <Button onClick={runSearch} disabled={loading} className="px-6">
+          <Button onClick={runSearch} disabled={loading} className="px-6 font-lalezar">
             {loading ? 'در حال تحلیل...' : 'جست‌وجوی نئو'}
           </Button>
         </div>
       </div>
-      <div className="rounded-3xl border border-primary-100 bg-primary-50/70 p-6 text-right text-sm text-primary-700">
+      <div className="rounded-3xl border border-primary-100 bg-primary-50/70 p-6 text-right text-sm font-lalezar text-primary-700">
         {insight}
       </div>
       <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
@@ -66,7 +66,7 @@ export function AiSearchClient() {
         ))}
       </div>
       {results.length === 0 && !loading ? (
-        <div className="rounded-3xl border border-dashed border-primary-200 bg-white p-10 text-center text-sm text-muted">
+        <div className="rounded-3xl border border-dashed border-primary-200 bg-white p-10 text-center text-sm font-lalezar text-muted">
           نتیجه‌ای یافت نشد. پرسش را تغییر دهید یا بازه بودجه را اصلاح کنید.
         </div>
       ) : null}
