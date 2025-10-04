@@ -28,7 +28,8 @@ const config: Config = {
         muted: '#4b5563'
       },
       fontFamily: {
-        sans: ['var(--font-vazirmatn)', 'Vazirmatn', 'system-ui', 'sans-serif']
+        sans: ['var(--font-vazirmatn)', 'Vazirmatn', 'system-ui', 'sans-serif'],
+        lalezar: ['var(--font-lalezar)', 'Lalezar', 'system-ui', 'sans-serif']
       },
       boxShadow: {
         neo: '0 20px 45px -15px rgba(40, 50, 160, 0.35)'
