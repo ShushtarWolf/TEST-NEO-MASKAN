@@ -93,7 +93,7 @@ export function ListingsClient({ initialListings }: ListingsClientProps) {
   }
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[320px_1fr]">
+    <div className="grid gap-8 lg:grid-cols-[320px_1fr]">
       <Modal
         open={isModalOpen}
         onClose={() => setModalOpen(false)}

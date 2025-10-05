@@ -15,27 +15,29 @@ export default async function HomePage() {
   });
 
   return (
-    <div className="space-y-16 pb-24">
+    <div className="bg-white">
       <Hero />
       <Stats />
 
-      <section className="mx-auto max-w-6xl px-6">
-        <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
-          <div className="text-right">
-            <p className="text-xs font-semibold tracking-[0.3em] text-primary-500">انتخاب هوشمند</p>
-            <h2 className="mt-2 text-2xl font-semibold text-dark">پیشنهادهای شخصی نئو</h2>
-            <p className="mt-2 max-w-2xl text-sm text-muted">
-              براساس بودجه و سبک زندگی خانواده شما، این واحدها بالاترین امتیاز انرژی و دسترسی را از موتور توصیه‌گر نئومسکن دریافت کرده‌اند.
-            </p>
+      <section className="bg-gray-50 py-16">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center mb-12">
+            <div className="text-right">
+              <p className="text-body-sm text-gray-500 font-body mb-2">انتخاب هوشمند</p>
+              <h2 className="text-display-sm text-gray-900 font-display mb-4">پیشنهادهای شخصی نئو</h2>
+              <p className="text-body-lg text-gray-600 font-body max-w-2xl">
+                براساس بودجه و سبک زندگی خانواده شما، این واحدها بالاترین امتیاز انرژی و دسترسی را از موتور توصیه‌گر نئومسکن دریافت کرده‌اند.
+              </p>
+            </div>
+            <Button asChild className="btn-modern-secondary">
+              <Link href="/dashboard">به‌روزرسانی ترجیحات</Link>
+            </Button>
           </div>
-          <Button asChild variant="secondary">
-            <Link href="/dashboard">به‌روزرسانی ترجیحات</Link>
-          </Button>
-        </div>
-        <div className="mt-10 grid gap-8 md:grid-cols-3">
-          {recommendations.map((listing) => (
-            <PropertyCard key={listing.id} listing={listing} highlight />
-          ))}
+          <div className="grid gap-8 md:grid-cols-3">
+            {recommendations.map((listing) => (
+              <PropertyCard key={listing.id} listing={listing} highlight />
+            ))}
+          </div>
         </div>
       </section>
 

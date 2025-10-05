@@ -5,12 +5,12 @@ export default async function ListingsPage() {
   const listings = await fetchListings();
 
   return (
-    <div className="bg-slate-50 py-16">
-      <div className="mx-auto max-w-6xl space-y-10 px-6">
-        <div className="space-y-4 text-right">
-          <p className="text-xs font-semibold tracking-[0.3em] text-primary-500">کلکسیون نئومسکن</p>
-          <h1 className="text-3xl font-semibold text-dark">واحدهای Inspire Maskan را کشف کنید</h1>
-          <p className="max-w-3xl text-sm text-muted">
+    <div className="bg-gray-50 min-h-screen">
+      <div className="mx-auto max-w-7xl px-6 py-8">
+        <div className="mb-8">
+          <p className="text-body-sm text-gray-500 font-body mb-2">کلکسیون نئومسکن</p>
+          <h1 className="text-display-lg text-gray-900 font-display mb-4">واحدهای Inspire Maskan را کشف کنید</h1>
+          <p className="text-body-lg text-gray-600 font-body max-w-3xl">
             هر ملک با روایت معماری، امتیاز انرژی و بینش داده‌محور ارائه می‌شود تا انتخابی آگاهانه داشته باشید.
           </p>
         </div>

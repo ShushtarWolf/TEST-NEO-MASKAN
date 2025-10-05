@@ -43,9 +43,9 @@ export function FilterSidebar({ availableTags, onApply }: FilterSidebarProps) {
   }
 
   return (
-    <aside className="space-y-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm w-full" dir="rtl">
+    <aside className="card p-6 space-y-6" dir="rtl">
       <div>
-        <h3 className="text-sm font-semibold text-dark">بودجه تقریبی (درهم)</h3>
+        <h3 className="text-body-lg text-gray-900 font-body font-semibold">بودجه تقریبی (درهم)</h3>
         <div className="mt-4 space-y-3 text-xs text-muted">
           <div className="flex items-center gap-3">
             <label className="w-16 text-right">کمینه</label>
@@ -77,7 +77,7 @@ export function FilterSidebar({ availableTags, onApply }: FilterSidebarProps) {
       </div>
 
       <div>
-        <h3 className="text-sm font-semibold text-dark">حداقل تعداد خواب</h3>
+        <h3 className="text-body-lg text-gray-900 font-body font-semibold">حداقل تعداد خواب</h3>
         <div className="mt-3 flex flex-wrap gap-2">
           {[2, 3, 4, 5].map((option) => (
             <button
@@ -104,7 +104,7 @@ export function FilterSidebar({ availableTags, onApply }: FilterSidebarProps) {
       </div>
 
       <div>
-        <h3 className="text-sm font-semibold text-dark">برچسب‌ها</h3>
+        <h3 className="text-body-lg text-gray-900 font-body font-semibold">برچسب‌ها</h3>
         <div className="mt-3 flex flex-wrap gap-2">
           {availableTags.map((tag) => (
             <button
@@ -123,7 +123,7 @@ export function FilterSidebar({ availableTags, onApply }: FilterSidebarProps) {
         </div>
       </div>
 
-      <Button onClick={applyFilters} className="w-full">
+      <Button onClick={applyFilters} className="w-full btn-modern-primary">
         اعمال فیلترها
       </Button>
     </aside>

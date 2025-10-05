@@ -57,24 +57,26 @@ export function Header() {
 
   return (
     <header className={cn(
-      "sticky top-0 z-50 border-b border-slate-200/60 backdrop-blur transition-all duration-300 supports-[backdrop-filter]:bg-white/70",
+      "sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 transition-all duration-300",
       isScrolled 
-        ? "bg-white/95 shadow-lg shadow-slate-200/20" 
-        : "bg-white/90"
+        ? "shadow-sm" 
+        : "shadow-none"
     )}>
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="flex flex-col text-right">
-            <span className="text-lg font-lalezar text-dark transition-colors group-hover:text-primary-600">نئومسکن</span>
-            <span className="text-xs font-medium tracking-[0.3em] text-muted">INSPIRE</span>
-          </div>
-          <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white shadow-neo transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary-500/25 group-hover:scale-105">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        {/* Logo Section */}
+        <Link href="/" className="flex items-center gap-4 group">
+          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary-600 text-white font-bold text-lg shadow-sm group-hover:shadow-md transition-all duration-200">
             NM
-          </span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-xl font-display font-bold text-gray-900 transition-colors group-hover:text-primary-600">نئومسکن</span>
+            <span className="text-xs font-accent tracking-wider text-gray-500">INSPIRE</span>
+          </div>
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex">
-          {navLinks.map((link, index) => (
+        {/* Navigation */}
+        <nav className="hidden items-center gap-1 md:flex">
+          {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -83,30 +85,32 @@ export function Header() {
                 handleNavigation(link.href);
               }}
               className={cn(
-                'relative text-sm font-lalezar font-medium transition-all duration-300 group',
-                isActive(link.href) ? 'text-primary-600' : 'text-muted hover:text-dark'
+                'relative px-4 py-2 text-sm font-body font-medium rounded-xl transition-all duration-200',
+                isActive(link.href) 
+                  ? 'bg-primary-600 text-white shadow-sm' 
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
               )}
-              style={{ animationDelay: `${index * 50}ms` }}
             >
-              <span className="relative z-10">{link.label}</span>
-              {isActive(link.href) && (
-                <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary-600 animate-pulse"></span>
-              )}
-              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+              {link.label}
             </Link>
           ))}
-          <Button asChild className="shadow-neo font-lalezar">
+        </nav>
+
+        {/* Right Section */}
+        <div className="flex items-center gap-3">
+          <Button asChild className="btn-modern-primary font-body">
             <Link href="/listings?cta=book-tour">رزرو بازدید</Link>
           </Button>
           <ChatbotToggle />
-        </nav>
+        </div>
 
+        {/* Mobile Menu */}
         <div className="flex items-center gap-2 md:hidden">
           <ChatbotToggle />
           <button
             type="button"
             onClick={() => setMobileOpen((prev) => !prev)}
-            className="rounded-full border border-slate-200 p-2 text-slate-600 shadow-sm"
+            className="p-2 rounded-xl text-gray-600 hover:bg-gray-100 transition-colors"
             aria-label="Toggle navigation"
           >
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -114,30 +118,33 @@ export function Header() {
         </div>
       </div>
 
-      {mobileOpen ? (
-        <div className="border-t border-slate-200 bg-white/95 px-6 pb-6 md:hidden">
-          <div className="flex flex-col gap-4 pt-4">
+      {/* Mobile Navigation */}
+      {mobileOpen && (
+        <div className="border-t border-gray-100 bg-white px-6 py-4 md:hidden">
+          <div className="flex flex-col gap-2">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
                 className={cn(
-                  'text-base font-lalezar font-semibold',
-                  isActive(link.href) ? 'text-primary-600' : 'text-dark'
+                  'px-4 py-3 text-base font-body font-medium rounded-xl transition-colors',
+                  isActive(link.href) 
+                    ? 'bg-primary-600 text-white' 
+                    : 'text-gray-700 hover:bg-gray-100'
                 )}
               >
                 {link.label}
               </Link>
             ))}
-            <Button asChild className="w-full justify-center shadow-neo font-lalezar">
+            <Button asChild className="w-full justify-center mt-2 btn-modern-primary font-body">
               <Link href="/listings?cta=book-tour" onClick={() => setMobileOpen(false)}>
                 رزرو بازدید
               </Link>
             </Button>
           </div>
         </div>
-      ) : null}
+      )}
     </header>
   );
 }

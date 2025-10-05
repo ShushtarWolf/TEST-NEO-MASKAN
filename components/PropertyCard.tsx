@@ -53,14 +53,11 @@ export function PropertyCard({ listing, highlight = false, style }: PropertyCard
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={cn(
-        'flex flex-col overflow-hidden rounded-3xl border border-slate-200/60 bg-white shadow-sm transition-all duration-500 ease-out',
-        'hover:-translate-y-2 hover:shadow-xl hover:shadow-primary-500/10',
-        'transform-gpu',
-        highlight && 'border-primary-200',
+        'card-interactive group',
+        highlight && 'ring-2 ring-primary-200',
         isVisible 
           ? 'opacity-100 translate-y-0' 
-          : 'opacity-0 translate-y-8',
-        isHovered && 'scale-[1.02] shadow-2xl shadow-primary-500/20'
+          : 'opacity-0 translate-y-4'
       )}
       style={{
         transitionDelay: isVisible ? '0ms' : '100ms',
@@ -68,50 +65,23 @@ export function PropertyCard({ listing, highlight = false, style }: PropertyCard
         ...style
       }}
     >
-      <div className="relative h-64 w-full overflow-hidden group">
-        {/* Quick Actions Overlay */}
-        <div className="absolute top-3 left-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
+      <div className="relative h-48 w-full overflow-hidden rounded-t-2xl">
+        {/* Quick Actions */}
+        <div className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
           <button
             onClick={(e) => {
               e.preventDefault();
               setIsFavorited(!isFavorited);
             }}
             className={cn(
-              "p-2 rounded-full backdrop-blur-sm transition-all duration-200",
+              "p-2 rounded-xl backdrop-blur-sm transition-all duration-200",
               isFavorited 
-                ? "bg-red-500/90 text-white" 
-                : "bg-white/90 text-slate-600 hover:bg-white hover:text-red-500"
+                ? "bg-red-500 text-white shadow-sm" 
+                : "bg-white/90 text-gray-600 hover:bg-white hover:text-red-500"
             )}
             aria-label={isFavorited ? "حذف از علاقه‌مندی‌ها" : "افزودن به علاقه‌مندی‌ها"}
           >
             <Heart className={cn("h-4 w-4", isFavorited && "fill-current")} />
-          </button>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              // Handle share functionality
-              if (navigator.share) {
-                navigator.share({
-                  title: listing.title,
-                  text: listing.description,
-                  url: window.location.href
-                });
-              }
-            }}
-            className="p-2 rounded-full bg-white/90 text-slate-600 hover:bg-white hover:text-primary-600 backdrop-blur-sm transition-all duration-200"
-            aria-label="اشتراک‌گذاری"
-          >
-            <Share2 className="h-4 w-4" />
-          </button>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              // Handle quick view
-            }}
-            className="p-2 rounded-full bg-white/90 text-slate-600 hover:bg-white hover:text-primary-600 backdrop-blur-sm transition-all duration-200"
-            aria-label="نمایش سریع"
-          >
-            <Eye className="h-4 w-4" />
           </button>
         </div>
         {shouldShowImage ? (
@@ -141,52 +111,69 @@ export function PropertyCard({ listing, highlight = false, style }: PropertyCard
             <span className="mt-2 text-xs font-lalezar font-semibold">پیش‌نمایش در دسترس نیست</span>
           </div>
         )}
-        {listing.featured ? (
-          <span className="absolute right-4 top-4 rounded-full bg-white/90 px-4 py-1 text-xs font-lalezar font-semibold text-primary-600 backdrop-blur-sm shadow-lg animate-pulse">
+        {listing.featured && (
+          <span className="absolute left-4 top-4 px-3 py-1 bg-primary-600 text-white text-xs font-body font-medium rounded-lg shadow-sm">
             ویژه
           </span>
-        ) : null}
+        )}
       </div>
-      <div className="flex flex-1 flex-col space-y-5 p-6 text-right" dir="rtl">
-        <div className="space-y-2 text-center">
-          <p className="text-xs font-semibold tracking-[0.2em] text-primary-500">{listing.location}</p>
-          <h3 className="text-lg font-lalezar font-semibold text-dark">{listing.title}</h3>
-          <p className="text-sm font-lalezar text-muted leading-relaxed text-justify">{listing.description}</p>
-        </div>
-        <div className="flex items-center justify-between text-sm">
-          <div className="flex items-center justify-center gap-4">
-            <span className="inline-flex items-center gap-1">
-              <BedDouble className="h-4 w-4 text-primary-500" />
-              <span className="font-lalezar">{listing.bedrooms} خواب</span>
-            </span>
-            <span className="inline-flex items-center gap-1">
-              <Bath className="h-4 w-4 text-primary-500" />
-              <span className="font-lalezar">{listing.bathrooms} حمام</span>
-            </span>
-            <span className="inline-flex items-center gap-1">
-              <Ruler className="h-4 w-4 text-primary-500" />
-              <span className="font-lalezar">{listing.area} متر</span>
-            </span>
+      <div className="flex flex-1 flex-col p-6">
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <p className="text-body-sm text-gray-500 font-body">{listing.location}</p>
+            {listing.featured && (
+              <span className="status-active">ویژه</span>
+            )}
           </div>
-          <span className="text-base font-lalezar font-semibold text-primary-600">
-            {Number(listing.price).toLocaleString('fa-IR')} درهم
-          </span>
+          <h3 className="text-body-lg text-gray-900 font-body font-semibold line-clamp-1">{listing.title}</h3>
+          <p className="text-body-sm text-gray-600 font-body line-clamp-2">{listing.description}</p>
         </div>
-        <div className="flex flex-wrap gap-2 text-xs">
-          {listing.tags.map((tag) => (
-            <span key={tag} className="rounded-full bg-primary-50 px-3 py-1 font-lalezar font-medium text-primary-600">
-              {tag}
+        <div className="mt-4 space-y-4">
+          {/* Property Details */}
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2">
+              <BedDouble className="h-4 w-4 text-gray-400" />
+              <span className="text-body-sm text-gray-600 font-body">{listing.bedrooms}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Bath className="h-4 w-4 text-gray-400" />
+              <span className="text-body-sm text-gray-600 font-body">{listing.bathrooms}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Ruler className="h-4 w-4 text-gray-400" />
+              <span className="text-body-sm text-gray-600 font-body">{listing.area} متر</span>
+            </div>
+          </div>
+
+          {/* Price and Action */}
+          <div className="flex items-center justify-between">
+            <span className="text-display-sm text-gray-900 font-display">
+              {Number(listing.price).toLocaleString('fa-IR')} درهم
             </span>
-          ))}
+            <Button asChild className="btn-modern-primary">
+              <Link href={`/listings/${listing.id}`}>
+                <ArrowLeft className="h-4 w-4 ml-2" />
+                مشاهده
+              </Link>
+            </Button>
+          </div>
         </div>
-        <div className="mt-auto flex items-center justify-between">
-          <div className="text-xs font-lalezar text-muted text-center">انرژی {listing.energyScore} · پیاده‌روی {listing.walkScore}</div>
-          <Button asChild variant="secondary" className="gap-2">
-            <Link href={`/listings/${listing.id}`} className="inline-flex items-center gap-2">
-              <ArrowLeft className="h-4 w-4" />
-              <span className="font-lalezar">جزئیات بیشتر</span>
-            </Link>
-          </Button>
+        {/* Tags */}
+        {listing.tags.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            {listing.tags.slice(0, 3).map((tag) => (
+              <span key={tag} className="px-3 py-1 bg-gray-100 text-gray-600 rounded-lg text-body-sm font-body">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {/* Energy & Walk Score */}
+        <div className="flex items-center gap-4 text-body-sm text-gray-500 font-body">
+          <span>انرژی {listing.energyScore}</span>
+          <span>•</span>
+          <span>پیاده‌روی {listing.walkScore}</span>
         </div>
       </div>
     </article>
