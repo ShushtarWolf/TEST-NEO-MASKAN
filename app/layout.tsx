@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Vazirmatn, Lalezar } from 'next/font/google';
+import { Vazirmatn, Lalezar, Inter } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/utils/cn';
 import { Header } from '@/components/Header';
@@ -16,6 +16,12 @@ const lalezar = Lalezar({
   weight: '400',
   subsets: ['arabic', 'latin'],
   variable: '--font-lalezar'
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap'
 });
 
 export const metadata: Metadata = {
@@ -39,6 +45,7 @@ export default function RootLayout({
           'min-h-screen bg-white text-dark',
           vazirmatn.variable,
           lalezar.variable,
+          inter.variable,
           'flex flex-col font-sans'
         )}
       >

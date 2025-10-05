@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useEffect, useMemo, useState, useRef } from 'react';
 import { Listing } from '@/types/listing';
 import { Button } from '@/ui/Button';
-import { ArrowLeft, Bath, BedDouble, ImageOff, Ruler } from 'lucide-react';
+import { ArrowLeft, Bath, BedDouble, ImageOff, Ruler, Heart, Share2, Eye } from 'lucide-react';
 import { cn } from '@/utils/cn';
 
 interface PropertyCardProps {
@@ -18,6 +18,7 @@ export function PropertyCard({ listing, highlight = false, style }: PropertyCard
   const [imageStatus, setImageStatus] = useState<'loading' | 'ready' | 'error'>('loading');
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [isFavorited, setIsFavorited] = useState(false);
   const cardRef = useRef<HTMLElement>(null);
 
   const shouldShowImage = useMemo(() => {
@@ -68,6 +69,51 @@ export function PropertyCard({ listing, highlight = false, style }: PropertyCard
       }}
     >
       <div className="relative h-64 w-full overflow-hidden group">
+        {/* Quick Actions Overlay */}
+        <div className="absolute top-3 left-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              setIsFavorited(!isFavorited);
+            }}
+            className={cn(
+              "p-2 rounded-full backdrop-blur-sm transition-all duration-200",
+              isFavorited 
+                ? "bg-red-500/90 text-white" 
+                : "bg-white/90 text-slate-600 hover:bg-white hover:text-red-500"
+            )}
+            aria-label={isFavorited ? "حذف از علاقه‌مندی‌ها" : "افزودن به علاقه‌مندی‌ها"}
+          >
+            <Heart className={cn("h-4 w-4", isFavorited && "fill-current")} />
+          </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              // Handle share functionality
+              if (navigator.share) {
+                navigator.share({
+                  title: listing.title,
+                  text: listing.description,
+                  url: window.location.href
+                });
+              }
+            }}
+            className="p-2 rounded-full bg-white/90 text-slate-600 hover:bg-white hover:text-primary-600 backdrop-blur-sm transition-all duration-200"
+            aria-label="اشتراک‌گذاری"
+          >
+            <Share2 className="h-4 w-4" />
+          </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              // Handle quick view
+            }}
+            className="p-2 rounded-full bg-white/90 text-slate-600 hover:bg-white hover:text-primary-600 backdrop-blur-sm transition-all duration-200"
+            aria-label="نمایش سریع"
+          >
+            <Eye className="h-4 w-4" />
+          </button>
+        </div>
         {shouldShowImage ? (
           <>
             <Image

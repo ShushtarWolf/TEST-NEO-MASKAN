@@ -8,6 +8,8 @@ import { FilterSidebar, FilterValues } from '@/components/FilterSidebar';
 import { SearchBar } from '@/components/SearchBar';
 import { Button } from '@/ui/Button';
 import { Modal } from '@/components/Modal';
+import { ListSkeleton } from '@/components/ui/Skeleton';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 
 interface ListingsClientProps {
   initialListings: Listing[];
@@ -21,9 +23,20 @@ export function ListingsClient({ initialListings }: ListingsClientProps) {
   const [activeFilters, setActiveFilters] = useState<FilterValues | null>(null);
   const [isModalOpen, setModalOpen] = useState(false);
   const [filterKey, setFilterKey] = useState(0);
+  const [recentSearches, setRecentSearches] = useState<string[]>([]);
 
   useEffect(() => {
     setDisplayed(initialListings);
+    
+    // Load recent searches from localStorage
+    const saved = localStorage.getItem('recentSearches');
+    if (saved) {
+      try {
+        setRecentSearches(JSON.parse(saved));
+      } catch (e) {
+        console.error('Error loading recent searches:', e);
+      }
+    }
   }, [initialListings]);
 
   const tags = useMemo(() => {
@@ -55,6 +68,15 @@ export function ListingsClient({ initialListings }: ListingsClientProps) {
   }
 
   function submitSearch() {
+    if (query.trim()) {
+      // Add to recent searches
+      setRecentSearches(prev => {
+        const newSearches = [query.trim(), ...prev.filter(s => s !== query.trim())].slice(0, 5);
+        localStorage.setItem('recentSearches', JSON.stringify(newSearches));
+        return newSearches;
+      });
+    }
+    
     const params = new URLSearchParams();
     if (query) params.set('q', query);
     fetchWithParams(params);
@@ -89,12 +111,18 @@ export function ListingsClient({ initialListings }: ListingsClientProps) {
         <FilterSidebar key={filterKey} availableTags={tags} onApply={handleApply} />
       </div>
       <div className="order-1 space-y-8 lg:order-2">
+        {/* Breadcrumb Navigation */}
+        <Breadcrumbs className="mb-4" />
+        
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <SearchBar
             value={query}
             onChange={setQuery}
             onSubmit={submitSearch}
             placeholder="جست‌وجوی دستی در عنوان یا محله"
+            instantSearch={true}
+            recentSearches={recentSearches}
+            suggestions={['ویلا ساحلی', 'آپارتمان مرکزی', 'خانه خانوادگی', 'پنت‌هاوس لوکس']}
           />
           <Button variant="ghost" onClick={resetAll} className="self-end text-xs font-lalezar text-muted">
             پاک‌سازی فیلترها
@@ -109,9 +137,7 @@ export function ListingsClient({ initialListings }: ListingsClientProps) {
         />
         {insight ? <div className="rounded-2xl bg-primary-50 p-4 text-sm font-lalezar text-primary-700">{insight}</div> : null}
         {loading ? (
-          <div className="rounded-3xl border border-dashed border-primary-200 bg-white p-10 text-center text-sm font-lalezar text-muted">
-            در حال بارگذاری پیشنهادها...
-          </div>
+          <ListSkeleton count={6} />
         ) : (
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {displayed.map((listing, index) => (

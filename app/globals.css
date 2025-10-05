@@ -2,6 +2,94 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Professional Design System */
+@layer base {
+  :root {
+    /* Spacing Scale */
+    --spacing-xs: 0.25rem;   /* 4px */
+    --spacing-sm: 0.5rem;    /* 8px */
+    --spacing-md: 1rem;      /* 16px */
+    --spacing-lg: 1.5rem;    /* 24px */
+    --spacing-xl: 2rem;      /* 32px */
+    --spacing-2xl: 3rem;     /* 48px */
+    --spacing-3xl: 4rem;     /* 64px */
+    
+    /* Border Radius Scale */
+    --radius-sm: 0.25rem;    /* 4px */
+    --radius-md: 0.5rem;     /* 8px */
+    --radius-lg: 0.75rem;    /* 12px */
+    --radius-xl: 1rem;       /* 16px */
+    --radius-2xl: 1.5rem;    /* 24px */
+    
+    /* Elevation System */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    
+    /* Typography Scale */
+    --text-xs: 0.75rem;      /* 12px */
+    --text-sm: 0.875rem;     /* 14px */
+    --text-base: 1rem;       /* 16px */
+    --text-lg: 1.125rem;     /* 18px */
+    --text-xl: 1.25rem;      /* 20px */
+    --text-2xl: 1.5rem;      /* 24px */
+    --text-3xl: 1.875rem;    /* 30px */
+    --text-4xl: 2.25rem;     /* 36px */
+    
+    /* Line Heights */
+    --leading-tight: 1.25;
+    --leading-snug: 1.375;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.625;
+    --leading-loose: 2;
+  }
+}
+
+/* Typography Classes */
+@layer components {
+  .font-display {
+    font-family: var(--font-lalezar);
+  }
+  
+  .font-body {
+    font-family: var(--font-vazirmatn);
+  }
+  
+  .font-accent {
+    font-family: var(--font-inter);
+  }
+  
+  .text-display-xl {
+    @apply text-4xl font-display font-bold leading-tight;
+  }
+  
+  .text-display-lg {
+    @apply text-3xl font-display font-bold leading-tight;
+  }
+  
+  .text-display-md {
+    @apply text-2xl font-display font-semibold leading-snug;
+  }
+  
+  .text-body-lg {
+    @apply text-lg font-body leading-relaxed;
+  }
+  
+  .text-body-md {
+    @apply text-base font-body leading-normal;
+  }
+  
+  .text-body-sm {
+    @apply text-sm font-body leading-normal;
+  }
+  
+  .text-accent {
+    @apply text-sm font-accent font-medium tracking-wide;
+  }
+}
+
 :root {
   color-scheme: light;
 }
@@ -60,6 +148,40 @@ a {
   50% {
     transform: translateY(-10px);
   }
+}
+
+@keyframes wave {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-wave {
+  position: relative;
+  overflow: hidden;
+}
+
+.animate-wave::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: wave 1.5s infinite;
 }
 
 /* Enhanced scroll behavior */
