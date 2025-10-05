@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useRef } from 'react';
 import { Listing } from '@/types/listing';
 import { Button } from '@/ui/Button';
 import { ArrowLeft, Bath, BedDouble, ImageOff, Ruler } from 'lucide-react';
@@ -11,10 +11,14 @@ import { cn } from '@/utils/cn';
 interface PropertyCardProps {
   listing: Listing;
   highlight?: boolean;
+  style?: React.CSSProperties;
 }
 
-export function PropertyCard({ listing, highlight = false }: PropertyCardProps) {
+export function PropertyCard({ listing, highlight = false, style }: PropertyCardProps) {
   const [imageStatus, setImageStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+  const [isVisible, setIsVisible] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const cardRef = useRef<HTMLElement>(null);
 
   const shouldShowImage = useMemo(() => {
     return Boolean(listing.image) && imageStatus !== 'error';
@@ -24,14 +28,46 @@ export function PropertyCard({ listing, highlight = false }: PropertyCardProps) 
     setImageStatus('loading');
   }, [listing.image]);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    );
+
+    if (cardRef.current) {
+      observer.observe(cardRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <article
+      ref={cardRef}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       className={cn(
-        'flex flex-col overflow-hidden rounded-3xl border border-slate-200/60 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-neo',
-        highlight && 'border-primary-200'
+        'flex flex-col overflow-hidden rounded-3xl border border-slate-200/60 bg-white shadow-sm transition-all duration-500 ease-out',
+        'hover:-translate-y-2 hover:shadow-xl hover:shadow-primary-500/10',
+        'transform-gpu',
+        highlight && 'border-primary-200',
+        isVisible 
+          ? 'opacity-100 translate-y-0' 
+          : 'opacity-0 translate-y-8',
+        isHovered && 'scale-[1.02] shadow-2xl shadow-primary-500/20'
       )}
+      style={{
+        transitionDelay: isVisible ? '0ms' : '100ms',
+        animation: isVisible ? 'slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards' : 'none',
+        ...style
+      }}
     >
-      <div className="relative h-64 w-full overflow-hidden">
+      <div className="relative h-64 w-full overflow-hidden group">
         {shouldShowImage ? (
           <>
             <Image
@@ -40,7 +76,7 @@ export function PropertyCard({ listing, highlight = false }: PropertyCardProps) 
               fill
               sizes="(max-width: 768px) 100vw, 33vw"
               className={cn(
-                'object-cover transition-opacity duration-500',
+                'object-cover transition-all duration-700 ease-out group-hover:scale-110',
                 imageStatus === 'ready' ? 'opacity-100' : 'opacity-0'
               )}
               onLoad={() => setImageStatus('ready')}
@@ -48,7 +84,9 @@ export function PropertyCard({ listing, highlight = false }: PropertyCardProps) 
               priority={highlight}
             />
             {imageStatus !== 'ready' ? (
-              <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-slate-200 via-slate-100 to-primary-50" />
+              <div className="absolute inset-0 bg-gradient-to-br from-slate-200 via-slate-100 to-primary-50">
+                <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 transform"></div>
+              </div>
             ) : null}
           </>
         ) : (
@@ -58,7 +96,7 @@ export function PropertyCard({ listing, highlight = false }: PropertyCardProps) 
           </div>
         )}
         {listing.featured ? (
-          <span className="absolute right-4 top-4 rounded-full bg-white/90 px-4 py-1 text-xs font-lalezar font-semibold text-primary-600">
+          <span className="absolute right-4 top-4 rounded-full bg-white/90 px-4 py-1 text-xs font-lalezar font-semibold text-primary-600 backdrop-blur-sm shadow-lg animate-pulse">
             ویژه
           </span>
         ) : null}

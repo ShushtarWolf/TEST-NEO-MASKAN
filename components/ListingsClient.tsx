@@ -114,8 +114,14 @@ export function ListingsClient({ initialListings }: ListingsClientProps) {
           </div>
         ) : (
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {displayed.map((listing) => (
-              <PropertyCard key={listing.id} listing={listing} />
+            {displayed.map((listing, index) => (
+              <PropertyCard 
+                key={listing.id} 
+                listing={listing} 
+                style={{
+                  animationDelay: `${index * 100}ms`
+                }}
+              />
             ))}
           </div>
         )}
