@@ -47,6 +47,15 @@ export function PropertyCard({ listing, highlight = false, style }: PropertyCard
     return () => observer.disconnect();
   }, []);
 
+  // Fallback: make visible after a short delay if intersection observer doesn't trigger
+  useEffect(() => {
+    const fallbackTimer = setTimeout(() => {
+      setIsVisible(true);
+    }, 500);
+
+    return () => clearTimeout(fallbackTimer);
+  }, []);
+
   return (
     <article
       ref={cardRef}
