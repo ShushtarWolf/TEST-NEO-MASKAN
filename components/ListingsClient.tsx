@@ -26,6 +26,7 @@ export function ListingsClient({ initialListings }: ListingsClientProps) {
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
 
   useEffect(() => {
+    console.log('Initial listings:', initialListings);
     setDisplayed(initialListings);
     
     // Load recent searches from localStorage
@@ -38,6 +39,13 @@ export function ListingsClient({ initialListings }: ListingsClientProps) {
       }
     }
   }, [initialListings]);
+
+  // Reset displayed listings when initialListings change
+  useEffect(() => {
+    if (displayed.length === 0 && initialListings.length > 0) {
+      setDisplayed(initialListings);
+    }
+  }, [initialListings, displayed.length]);
 
   const tags = useMemo(() => {
     const allTags = new Set<string>();
@@ -130,7 +138,9 @@ export function ListingsClient({ initialListings }: ListingsClientProps) {
         </div>
         <SmartSearch
           onResults={(results) => {
-            setDisplayed(results);
+            if (results.length > 0) {
+              setDisplayed(results);
+            }
           }}
           onInsight={setInsight}
           onLoadingChange={setLoading}
@@ -140,7 +150,7 @@ export function ListingsClient({ initialListings }: ListingsClientProps) {
           <ListSkeleton count={6} />
         ) : (
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {displayed.map((listing, index) => (
+            {displayed.length > 0 ? displayed.map((listing, index) => (
               <PropertyCard 
                 key={listing.id} 
                 listing={listing} 
@@ -148,7 +158,12 @@ export function ListingsClient({ initialListings }: ListingsClientProps) {
                   animationDelay: `${index * 100}ms`
                 }}
               />
-            ))}
+            )) : (
+              <div className="col-span-full text-center py-8">
+                <p className="text-gray-500">Loading properties...</p>
+                <p className="text-sm text-gray-400 mt-2">Displayed count: {displayed.length}</p>
+              </div>
+            )}
           </div>
         )}
         {displayed.length === 0 && !loading ? (
